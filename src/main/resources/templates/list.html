@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{Layout}">
+<head>
+    <title>秒杀列表页</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <!--使用bootstrap样式-->
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading text-center">
+                <h1>秒杀列表</h1>
+            </div>
+            <div class="panel-body">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <td>名称</td>
+                        <td>库存</td>
+                        <td>开始时间</td>
+                        <td>结束时间</td>
+                        <td>秒杀时间</td>
+                        <td>详情页</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="seckill : ${list}">
+                        <td th:text="${seckill.name}"></td>
+                        <td th:text="${seckill.number}"></td>
+                        <td th:text="${#calendars.format(seckill.startTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+                        <td th:text="${#calendars.format(seckill.endTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+                        <td th:text="${#calendars.format(seckill.createTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+                        <td>
+                            <a class="btn btn-info" th:href="@{'/seckill/'+${seckill.seckillId}+'/detail'}" th:target="_blank">link</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+</body>
+</html>

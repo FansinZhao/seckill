@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{Layout}">
+<head>
+    <title>秒杀列表页</title>
+</head>
+<body>
+<section layout:fragment="content">
+<!--使用bootstrap样式-->
+<div class="container">
+    <div class="panel panel-default text-center">
+        <div class="panel-heading" th:text="${seckill.name}">
+        </div>
+        <div class="panel-body">
+            <h2 class="text-danger">
+                <!--显示图标-->
+                <span class="glyphicon glyphicon-time"></span>
+                <!--显示倒计时-->
+                <span class="glyphicon" id="seckill-box"></span>
+            </h2>
+        </div>
+    </div>
+</div>
+<div id="killPhoneModal" class="modal fade" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="media-header">
+                <h3 class="modal-title text-center">
+                    <span class="glyphicon glyphicon-phone"></span>
+                </h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-8 col-xs-offset-2">
+                        <input class="form-control" type="text" name="killPhone" id="killPhoneKey"
+                               placeholder="请填入手机号^o^"/>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <!--验证信息-->
+                <span id="killPhoneMessage" class="glyphicon"></span>
+                <button class="btn btn-success" type="button" id="killPhoneBtn">
+                    <span class="glyphicon glyphicon-phone"></span>
+                    Submit
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+    <!--必须放在section中-->
+    <script src="/static/js/jquery.cookie.min.js"></script>
+    <script src="/static/js/jquery.countdown.min.js"></script>
+    <script src="/static/js/seckill.js"></script>
+    <script type="text/javascript">
+        $(function () {
+        seckill.detail.init({
+            seckillId:[(${seckill.seckillId})],
+            startTime:[(${seckill.startTime.time})],
+            endTime:[(${seckill.endTime.time})]
+        });
+        });
+
+    </script>
+</section>
+</body>
+
+</html>
